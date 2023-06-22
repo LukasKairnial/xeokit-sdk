@@ -398,7 +398,7 @@ class Node extends Component {
             this._children[i].visible = visible;
         }
         if (this._isObject) {
-            this.scene._objectVisibilityUpdated(this, visible);
+            this.scene._objectVisibilityUpdated(this);
         }
     }
 
@@ -1344,6 +1344,11 @@ class Node extends Component {
         }
         if (this._isObject) {
             this.scene._deregisterObject(this);
+            this.visible = false;
+            this.xrayed = false;
+            this.selected = false;
+            this.highlighted = false;
+
             if (this._visible) {
                 this.scene._objectVisibilityUpdated(this, false);
             }
@@ -1358,7 +1363,7 @@ class Node extends Component {
             }
             this.scene._objectColorizeUpdated(this, false);
             this.scene._objectOpacityUpdated(this, false);
-            this.scene._objectOffsetUpdated(this, false);
+            this.scene._objectOffsetUpdated(this, true);
         }
         if (this._isModel) {
             this.scene._deregisterModel(this);

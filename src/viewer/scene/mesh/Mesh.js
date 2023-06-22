@@ -1924,6 +1924,11 @@ class Mesh extends Component {
         this.scene._renderer.putPickID(this._state.pickID); // TODO: somehow puch this down into xeokit framework?
         if (this._isObject) {
             this.scene._deregisterObject(this);
+            this.visible = false;
+            this.xrayed = false;
+            this.selected = false;
+            this.highlighted = false;
+
             if (this._visible) {
                 this.scene._objectVisibilityUpdated(this, false);
             }
@@ -1938,7 +1943,7 @@ class Mesh extends Component {
             }
             this.scene._objectColorizeUpdated(this, false);
             this.scene._objectOpacityUpdated(this, false);
-            this.scene._objectOffsetUpdated(this, false);
+            this.scene._objectOffsetUpdated(this, true);
         }
         if (this._isModel) {
             this.scene._deregisterModel(this);

@@ -717,6 +717,11 @@ class VBOSceneModelNode {
         const scene = this.model.scene;
         if (this._isObject) {
             scene._deregisterObject(this);
+            this.visible = false;
+            this.xrayed = false;
+            this.selected = false;
+            this.highlighted = false;
+
             if (this.visible) {
                 scene._objectVisibilityUpdated(this, false);
             }
@@ -731,11 +736,9 @@ class VBOSceneModelNode {
             }
             if (this._opacityUpdated) {
                 this.scene._objectColorizeUpdated(this, false);
-            }
-            if (this._opacityUpdated) {
                 this.scene._objectOpacityUpdated(this, false);
             }
-            this.scene._objectOffsetUpdated(this, false);
+            this.scene._objectOffsetUpdated(this, true);
         }
         for (let i = 0, len = this.meshes.length; i < len; i++) {
             this.meshes[i]._destroy();
